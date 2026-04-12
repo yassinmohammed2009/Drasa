@@ -224,7 +224,7 @@
     <div class="header-top">
       <div>
         <div class="site-title">جدول المراجعة</div>
-        <div class="site-subtitle">10 أبريل – 4 يونيو 2026</div>
+        <div class="site-subtitle">12 أبريل – 31 مايو 2026</div>
       </div>
       <div class="progress-stat">
         <div class="progress-percent" id="progressPercent">0%</div>
@@ -246,80 +246,72 @@
 <footer>جدول المراجعة الدراسية – 2026</footer>
 
 <script>
-  const STORAGE_KEY = "study-tracker-v2";
+  const STORAGE_KEY = "study-tracker-v3";
 
   const TASKS = [
     // الأسبوع 1
-    { date:"2026-04-10", week:1, weekLabel:"الأسبوع 1", day:1,  subjects:["عربي 1"] },
-    { date:"2026-04-11", week:1, weekLabel:"الأسبوع 1", day:2,  subjects:["كيمياء 1","أحياء 1"] },
-    { date:"2026-04-12", week:1, weekLabel:"الأسبوع 1", day:3,  subjects:["إسلامية (سورة 1)","فيزياء 1"] },
-    { date:"2026-04-13", week:1, weekLabel:"الأسبوع 1", day:4,  subjects:["كيمياء 2"] },
-    { date:"2026-04-14", week:1, weekLabel:"الأسبوع 1", day:5,  subjects:["أحياء 2","عربي 2"] },
-    { date:"2026-04-15", week:1, weekLabel:"الأسبوع 1", day:6,  subjects:["كيمياء 3","إسلامية (حديث 1)"] },
-    { date:"2026-04-16", week:1, weekLabel:"الأسبوع 1", day:7,  subjects:["فيزياء 2"] },
+    { date:"2026-04-12", week:1, weekLabel:"الأسبوع 1", day:1,  subjects:["كيمياء 1"] },
+    { date:"2026-04-13", week:1, weekLabel:"الأسبوع 1", day:2,  subjects:["أحياء 1","نصف إسلامية (سورة 1)"] },
+    { date:"2026-04-14", week:1, weekLabel:"الأسبوع 1", day:3,  subjects:["فيزياء 1","نصف كيمياء 2"] },
+    { date:"2026-04-15", week:1, weekLabel:"الأسبوع 1", day:4,  subjects:["أحياء 2","نصف عربي 2"] },
+    { date:"2026-04-16", week:1, weekLabel:"الأسبوع 1", day:5,  subjects:["كيمياء 3","نصف حديث 1"] },
+    { date:"2026-04-17", week:1, weekLabel:"الأسبوع 1", day:6,  subjects:["فيزياء 2","نصف أحياء 3"] },
+    { date:"2026-04-18", week:1, weekLabel:"الأسبوع 1", day:7,  subjects:["كيمياء 4","نصف عربي 3"] },
 
     // الأسبوع 2
-    { date:"2026-04-17", week:2, weekLabel:"الأسبوع 2", day:8,  subjects:["أحياء 3","كيمياء 4"] },
-    { date:"2026-04-18", week:2, weekLabel:"الأسبوع 2", day:9,  subjects:["عربي 3","أحياء 4"] },
-    { date:"2026-04-19", week:2, weekLabel:"الأسبوع 2", day:10, subjects:["إسلامية (10 معاني)"] },
-    { date:"2026-04-20", week:2, weekLabel:"الأسبوع 2", day:11, subjects:["فيزياء 3","كيمياء 5"] },
-    { date:"2026-04-21", week:2, weekLabel:"الأسبوع 2", day:12, subjects:["أحياء 5","عربي 4"] },
-    { date:"2026-04-22", week:2, weekLabel:"الأسبوع 2", day:13, subjects:["كيمياء 6"] },
-    { date:"2026-04-23", week:2, weekLabel:"الأسبوع 2", day:14, subjects:["إسلامية (سورة 2)","فيزياء 4"] },
+    { date:"2026-04-19", week:2, weekLabel:"الأسبوع 2", day:8,  subjects:["أحياء 4","نصف معاني"] },
+    { date:"2026-04-20", week:2, weekLabel:"الأسبوع 2", day:9,  subjects:["فيزياء 3","نصف كيمياء 5"] },
+    { date:"2026-04-21", week:2, weekLabel:"الأسبوع 2", day:10, subjects:["أحياء 5","نصف عربي 4"] },
+    { date:"2026-04-22", week:2, weekLabel:"الأسبوع 2", day:11, subjects:["كيمياء 6","نصف سورة 2"] },
+    { date:"2026-04-23", week:2, weekLabel:"الأسبوع 2", day:12, subjects:["فيزياء 4","نصف أحياء 6"] },
+    { date:"2026-04-24", week:2, weekLabel:"الأسبوع 2", day:13, subjects:["كيمياء 7","نصف عربي 5"] },
+    { date:"2026-04-25", week:2, weekLabel:"الأسبوع 2", day:14, subjects:["أحياء 7","نصف حديث 2"] },
 
     // الأسبوع 3
-    { date:"2026-04-24", week:3, weekLabel:"الأسبوع 3", day:15, subjects:["أحياء 6","كيمياء 7"] },
-    { date:"2026-04-25", week:3, weekLabel:"الأسبوع 3", day:16, subjects:["عربي 5","أحياء 7"] },
-    { date:"2026-04-26", week:3, weekLabel:"الأسبوع 3", day:17, subjects:["إسلامية (حديث 2)"] },
-    { date:"2026-04-27", week:3, weekLabel:"الأسبوع 3", day:18, subjects:["فيزياء 5","كيمياء 8"] },
-    { date:"2026-04-28", week:3, weekLabel:"الأسبوع 3", day:19, subjects:["أحياء 8","عربي 6"] },
-    { date:"2026-04-29", week:3, weekLabel:"الأسبوع 3", day:20, subjects:["كيمياء 9"] },
-    { date:"2026-04-30", week:3, weekLabel:"الأسبوع 3", day:21, subjects:["إسلامية (10 معاني)","فيزياء 6"] },
+    { date:"2026-04-26", week:3, weekLabel:"الأسبوع 3", day:15, subjects:["فيزياء 5","نصف كيمياء 8"] },
+    { date:"2026-04-27", week:3, weekLabel:"الأسبوع 3", day:16, subjects:["أحياء 8","نصف عربي 6"] },
+    { date:"2026-04-28", week:3, weekLabel:"الأسبوع 3", day:17, subjects:["كيمياء 9","نصف معاني"] },
+    { date:"2026-04-29", week:3, weekLabel:"الأسبوع 3", day:18, subjects:["فيزياء 6","نصف أحياء 9"] },
+    { date:"2026-04-30", week:3, weekLabel:"الأسبوع 3", day:19, subjects:["كيمياء 10","نصف عربي 7"] },
+    { date:"2026-05-01", week:3, weekLabel:"الأسبوع 3", day:20, subjects:["أحياء 10","نصف سورة 3"] },
+    { date:"2026-05-02", week:3, weekLabel:"الأسبوع 3", day:21, subjects:["فيزياء 7","نصف كيمياء 11"] },
 
     // الأسبوع 4
-    { date:"2026-05-01", week:4, weekLabel:"الأسبوع 4", day:22, subjects:["أحياء 9","كيمياء 10"] },
-    { date:"2026-05-02", week:4, weekLabel:"الأسبوع 4", day:23, subjects:["عربي 7","أحياء 10"] },
-    { date:"2026-05-03", week:4, weekLabel:"الأسبوع 4", day:24, subjects:["إسلامية (سورة 3)"] },
-    { date:"2026-05-04", week:4, weekLabel:"الأسبوع 4", day:25, subjects:["فيزياء 7","كيمياء 11"] },
-    { date:"2026-05-05", week:4, weekLabel:"الأسبوع 4", day:26, subjects:["أحياء 11","عربي 8"] },
-    { date:"2026-05-06", week:4, weekLabel:"الأسبوع 4", day:27, subjects:["كيمياء 12"] },
-    { date:"2026-05-07", week:4, weekLabel:"الأسبوع 4", day:28, subjects:["إسلامية (حديث 3)","فيزياء 8"] },
+    { date:"2026-05-03", week:4, weekLabel:"الأسبوع 4", day:22, subjects:["أحياء 11","نصف عربي 8"] },
+    { date:"2026-05-04", week:4, weekLabel:"الأسبوع 4", day:23, subjects:["كيمياء 12","نصف حديث 3"] },
+    { date:"2026-05-05", week:4, weekLabel:"الأسبوع 4", day:24, subjects:["فيزياء 8","نصف أحياء 12"] },
+    { date:"2026-05-06", week:4, weekLabel:"الأسبوع 4", day:25, subjects:["كيمياء 13","نصف عربي 9"] },
+    { date:"2026-05-07", week:4, weekLabel:"الأسبوع 4", day:26, subjects:["أحياء 13","نصف معاني"] },
+    { date:"2026-05-08", week:4, weekLabel:"الأسبوع 4", day:27, subjects:["فيزياء 9","نصف كيمياء 14"] },
+    { date:"2026-05-09", week:4, weekLabel:"الأسبوع 4", day:28, subjects:["أحياء 14","مراجعة عربي خفيفة"] },
 
     // الأسبوع 5
-    { date:"2026-05-08", week:5, weekLabel:"الأسبوع 5", day:29, subjects:["أحياء 12","كيمياء 13"] },
-    { date:"2026-05-09", week:5, weekLabel:"الأسبوع 5", day:30, subjects:["عربي 9","أحياء 13"] },
-    { date:"2026-05-10", week:5, weekLabel:"الأسبوع 5", day:31, subjects:["إسلامية (10 معاني)"] },
-    { date:"2026-05-11", week:5, weekLabel:"الأسبوع 5", day:32, subjects:["فيزياء 9","كيمياء 14"] },
-    { date:"2026-05-12", week:5, weekLabel:"الأسبوع 5", day:33, subjects:["أحياء 14","مراجعة عربي"] },
-    { date:"2026-05-13", week:5, weekLabel:"الأسبوع 5", day:34, subjects:["كيمياء 15"] },
-    { date:"2026-05-14", week:5, weekLabel:"الأسبوع 5", day:35, subjects:["إسلامية (سورة 4)","فيزياء 10"] },
+    { date:"2026-05-10", week:5, weekLabel:"الأسبوع 5", day:29, subjects:["كيمياء 15","نصف سورة 4"] },
+    { date:"2026-05-11", week:5, weekLabel:"الأسبوع 5", day:30, subjects:["فيزياء 10","نصف أحياء 15"] },
+    { date:"2026-05-12", week:5, weekLabel:"الأسبوع 5", day:31, subjects:["كيمياء 16","نصف حديث 4"] },
+    { date:"2026-05-13", week:5, weekLabel:"الأسبوع 5", day:32, subjects:["أحياء 16","مراجعة عربي"] },
+    { date:"2026-05-14", week:5, weekLabel:"الأسبوع 5", day:33, subjects:["فيزياء 11","نصف كيمياء 17"] },
+    { date:"2026-05-15", week:5, weekLabel:"الأسبوع 5", day:34, subjects:["أحياء 17","نصف معاني"] },
+    { date:"2026-05-16", week:5, weekLabel:"الأسبوع 5", day:35, subjects:["كيمياء 18","مراجعة عربي"] },
 
     // الأسبوع 6
-    { date:"2026-05-15", week:6, weekLabel:"الأسبوع 6", day:36, subjects:["أحياء 15","كيمياء 16"] },
-    { date:"2026-05-16", week:6, weekLabel:"الأسبوع 6", day:37, subjects:["إسلامية (حديث 4)","أحياء 16"] },
-    { date:"2026-05-17", week:6, weekLabel:"الأسبوع 6", day:38, subjects:["مراجعة عربي"] },
-    { date:"2026-05-18", week:6, weekLabel:"الأسبوع 6", day:39, subjects:["فيزياء 11","كيمياء 17"] },
-    { date:"2026-05-19", week:6, weekLabel:"الأسبوع 6", day:40, subjects:["أحياء 17","إسلامية (10 معاني)"] },
-    { date:"2026-05-20", week:6, weekLabel:"الأسبوع 6", day:41, subjects:["كيمياء 18"] },
-    { date:"2026-05-21", week:6, weekLabel:"الأسبوع 6", day:42, subjects:["فيزياء 12","أحياء 18"] },
+    { date:"2026-05-17", week:6, weekLabel:"الأسبوع 6", day:36, subjects:["فيزياء 12","نصف أحياء 18"] },
+    { date:"2026-05-18", week:6, weekLabel:"الأسبوع 6", day:37, subjects:["كيمياء 19","نصف سورة 5"] },
+    { date:"2026-05-19", week:6, weekLabel:"الأسبوع 6", day:38, subjects:["أحياء 19","مراجعة"] },
+    { date:"2026-05-20", week:6, weekLabel:"الأسبوع 6", day:39, subjects:["فيزياء 13","نصف كيمياء 20"] },
+    { date:"2026-05-21", week:6, weekLabel:"الأسبوع 6", day:40, subjects:["أحياء 20","نصف حديث 5"] },
+    { date:"2026-05-22", week:6, weekLabel:"الأسبوع 6", day:41, subjects:["فيزياء 14","نصف أحياء 21"] },
+    { date:"2026-05-23", week:6, weekLabel:"الأسبوع 6", day:42, subjects:["فيزياء 15","نصف أحياء 22"] },
 
-    // الأسبوع 7
-    { date:"2026-05-22", week:7, weekLabel:"الأسبوع 7", day:43, subjects:["كيمياء 19","إسلامية (سورة 5)"] },
-    { date:"2026-05-23", week:7, weekLabel:"الأسبوع 7", day:44, subjects:["أحياء 19","مراجعة"] },
-    { date:"2026-05-24", week:7, weekLabel:"الأسبوع 7", day:45, subjects:["فيزياء 13"] },
-    { date:"2026-05-25", week:7, weekLabel:"الأسبوع 7", day:46, subjects:["كيمياء 20","أحياء 20"] },
-    { date:"2026-05-26", week:7, weekLabel:"الأسبوع 7", day:47, subjects:["إسلامية (حديث 5)","فيزياء 14"] },
-    { date:"2026-05-27", week:7, weekLabel:"الأسبوع 7", day:48, subjects:["أحياء 21"] },
-    { date:"2026-05-28", week:7, weekLabel:"الأسبوع 7", day:49, subjects:["فيزياء 15","أحياء 22"] },
-    { date:"2026-05-29", week:7, weekLabel:"الأسبوع 7", day:50, subjects:["فيزياء 16","أحياء 23"] },
-
-    // المراجعة
-    { date:"2026-05-30", week:8, weekLabel:"المراجعة", day:51, subjects:["فيزياء 17"] },
-    { date:"2026-05-31", week:8, weekLabel:"المراجعة", day:52, subjects:["أحياء 24","أحياء 25"] },
-    { date:"2026-06-01", week:8, weekLabel:"المراجعة", day:53, subjects:["مراجعة كيمياء","مراجعة فيزياء"] },
-    { date:"2026-06-02", week:8, weekLabel:"المراجعة", day:54, subjects:["مراجعة إسلامية","مراجعة عربي"] },
-    { date:"2026-06-03", week:8, weekLabel:"المراجعة", day:55, subjects:["مراجعة شاملة (كيمياء + فيزياء)"] },
-    { date:"2026-06-04", week:8, weekLabel:"المراجعة", day:56, subjects:["مراجعة نهائية خفيفة"] },
+    // الأسبوع 7 (مراجعة مريحة)
+    { date:"2026-05-24", week:7, weekLabel:"الأسبوع 7 (مراجعة مريحة)", day:43, subjects:["فيزياء 16","نصف أحياء 23"] },
+    { date:"2026-05-25", week:7, weekLabel:"الأسبوع 7 (مراجعة مريحة)", day:44, subjects:["فيزياء 17","نصف أحياء 24"] },
+    { date:"2026-05-26", week:7, weekLabel:"الأسبوع 7 (مراجعة مريحة)", day:45, subjects:["أحياء 25","مراجعة كيمياء"] },
+    { date:"2026-05-27", week:7, weekLabel:"الأسبوع 7 (مراجعة مريحة)", day:46, subjects:["مراجعة فيزياء","مراجعة أحياء"] },
+    { date:"2026-05-28", week:7, weekLabel:"الأسبوع 7 (مراجعة مريحة)", day:47, subjects:["مراجعة كيمياء","مراجعة إسلامية"] },
+    { date:"2026-05-29", week:7, weekLabel:"الأسبوع 7 (مراجعة مريحة)", day:48, subjects:["مراجعة عربي","مراجعة أحياء"] },
+    { date:"2026-05-30", week:7, weekLabel:"الأسبوع 7 (مراجعة مريحة)", day:49, subjects:["مراجعة شاملة (كيمياء + فيزياء)"] },
+    { date:"2026-05-31", week:7, weekLabel:"الأسبوع 7 (مراجعة مريحة)", day:50, subjects:["مراجعة نهائية خفيفة لكل المواد"] },
   ];
 
   function getSubjectClass(s) {
@@ -327,7 +319,8 @@
     if (s.includes("فيزياء")) return "color-physics";
     if (s.includes("أحياء"))  return "color-biology";
     if (s.includes("عربي"))   return "color-arabic";
-    if (s.includes("إسلامية")) return "color-islamic";
+    if (s.includes("إسلامية") || s.includes("حديث") || s.includes("معاني") || s.includes("سورة")) return "color-islamic";
+    if (s.includes("مراجعة")) return "color-review";
     return "color-review";
   }
 
@@ -336,7 +329,8 @@
     if (s.includes("فيزياء")) return "فيزياء";
     if (s.includes("أحياء"))  return "أحياء";
     if (s.includes("عربي"))   return "عربي";
-    if (s.includes("إسلامية")) return "إسلامية";
+    if (s.includes("إسلامية") || s.includes("حديث") || s.includes("معاني") || s.includes("سورة")) return "إسلامية";
+    if (s.includes("مراجعة")) return "مراجعة";
     return "مراجعة";
   }
 
@@ -407,7 +401,7 @@
       const allDone = done === total;
       const isActive = activeWeek === w;
       const weekLabel = TASKS.find(t => t.week === w).weekLabel;
-      const shortLabel = w === 8 ? "مراجعة" : `${w}`;
+      const shortLabel = `${w}`;
       const btn = document.createElement("button");
       btn.className = "week-btn" + (isActive ? " active" : "") + (allDone && !isActive ? " all-done" : "");
       btn.textContent = shortLabel + (allDone ? " ✓" : "");
