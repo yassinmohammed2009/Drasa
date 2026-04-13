@@ -24,7 +24,7 @@
       backdrop-filter: blur(20px);
       border-bottom: 1px solid #e2e8f0;
       box-shadow: 0 1px 8px rgba(0,0,0,0.05);
-      padding: 16px 20px 12px;
+      padding: 16px 20px 0;
     }
     .header-inner { max-width: 860px; margin: 0 auto; }
     .header-top {
@@ -48,6 +48,7 @@
     .progress-bar-wrap {
       width: 100%; height: 10px;
       background: #e2e8f0; border-radius: 99px; overflow: hidden;
+      margin-bottom: 0;
     }
     .progress-bar-fill {
       height: 100%;
@@ -56,10 +57,35 @@
       transition: width 0.7s ease;
     }
 
-    /* NAV */
+    /* MAIN TABS */
+    .main-tabs {
+      display: flex;
+      gap: 0;
+      margin-top: 14px;
+      border-top: 1px solid #e2e8f0;
+    }
+    .main-tab-btn {
+      flex: 1;
+      padding: 12px 0;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: #94a3b8;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .main-tab-btn.active {
+      color: #6366f1;
+      border-bottom-color: #6366f1;
+    }
+    .main-tab-btn:hover:not(.active) { color: #475569; }
+
+    /* WEEK NAV */
     .week-nav {
       position: sticky;
-      top: 109px;
+      top: 128px;
       z-index: 40;
       background: rgba(255,255,255,0.75);
       backdrop-filter: blur(12px);
@@ -94,6 +120,10 @@
 
     /* MAIN */
     main { max-width: 860px; margin: 0 auto; padding: 24px 20px 60px; }
+
+    /* PAGE SECTIONS */
+    .page { display: none; }
+    .page.active { display: block; }
 
     .week-section { margin-bottom: 36px; }
     .week-header {
@@ -208,12 +238,112 @@
     .complete-btn.is-done .done-text { display: flex; align-items: center; gap: 4px; }
     .complete-btn svg { width: 13px; height: 13px; }
 
+    /* ===== ROUTINE PAGE ===== */
+    .routine-page { padding-top: 4px; }
+
+    .routine-section {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .routine-section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .rs-morning { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .rs-study1  { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+    .rs-duhr    { background: linear-gradient(135deg, #14b8a6, #0d9488); }
+    .rs-study2  { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+    .rs-asr     { background: linear-gradient(135deg, #10b981, #059669); }
+    .rs-maghrib { background: linear-gradient(135deg, #f43f5e, #e11d48); }
+    .rs-night   { background: linear-gradient(135deg, #1e293b, #334155); }
+
+    .routine-items { padding: 6px 0; }
+
+    .routine-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 18px;
+      border-bottom: 1px solid #f1f5f9;
+      transition: background 0.15s;
+    }
+    .routine-item:last-child { border-bottom: none; }
+    .routine-item:hover { background: #fafafa; }
+
+    .routine-time {
+      font-size: 12px;
+      font-weight: 700;
+      color: #6366f1;
+      background: #ede9fe;
+      padding: 3px 8px;
+      border-radius: 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .routine-time.no-time {
+      background: transparent;
+      color: transparent;
+      width: 0; padding: 0;
+    }
+
+    .routine-text {
+      font-size: 14px;
+      color: #334155;
+      line-height: 1.5;
+      flex: 1;
+    }
+    .routine-emoji { font-size: 16px; margin-left: 4px; }
+
+    .routine-why {
+      background: linear-gradient(135deg, #f0f4ff, #ede9fe);
+      border: 1px solid #c7d2fe;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-top: 8px;
+      margin-bottom: 24px;
+    }
+    .routine-why-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #4f46e5;
+      margin-bottom: 12px;
+    }
+    .routine-why-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.5;
+    }
+    .routine-why-dot {
+      width: 6px; height: 6px;
+      background: #6366f1;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
     footer { text-align: center; padding: 24px; font-size: 12px; color: #94a3b8; }
 
     @media (max-width: 600px) {
       .site-title { font-size: 20px; }
       .progress-percent { font-size: 22px; }
       .task-name { font-size: 13px; }
+      .routine-item { gap: 8px; padding: 10px 14px; }
+      .routine-section-header { padding: 12px 14px; font-size: 14px; }
     }
   </style>
 </head>
@@ -226,22 +356,173 @@
         <div class="site-title">جدول المراجعة</div>
         <div class="site-subtitle">12 أبريل – 31 مايو 2026</div>
       </div>
-      <div class="progress-stat">
+      <div class="progress-stat" id="progressWrap">
         <div class="progress-percent" id="progressPercent">0%</div>
         <div class="progress-count" id="progressCount">0 / 0</div>
       </div>
     </div>
-    <div class="progress-bar-wrap">
+    <div class="progress-bar-wrap" id="progressBarWrap">
       <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="main-tabs">
+      <button class="main-tab-btn active" id="tabJadwal" onclick="switchTab('jadwal')">📅 الجدول</button>
+      <button class="main-tab-btn" id="tabRoutine" onclick="switchTab('routine')">🌅 الروتين</button>
     </div>
   </div>
 </header>
 
-<nav class="week-nav">
+<nav class="week-nav" id="weekNavBar">
   <div class="week-nav-inner" id="weekNav"></div>
 </nav>
 
-<main id="mainContent"></main>
+<main>
+  <!-- JADWAL PAGE -->
+  <div class="page active" id="pageJadwal" style="max-width:860px;margin:0 auto;padding:24px 20px 60px;">
+    <div id="mainContent"></div>
+  </div>
+
+  <!-- ROUTINE PAGE -->
+  <div class="page" id="pageRoutine" style="max-width:860px;margin:0 auto;padding:24px 20px 60px;">
+    <div class="routine-page">
+
+      <!-- بعد الاستيقاظ -->
+      <div class="routine-section">
+        <div class="routine-section-header rs-morning">🌅 بعد الاستيقاظ</div>
+        <div class="routine-items">
+          <div class="routine-item">
+            <span class="routine-time">6:30 – 7:00</span>
+            <span class="routine-text">🕌 صلاة الفجر + أذكار</span>
+          </div>
+          <div class="routine-item">
+            <span class="routine-time">7:00 – 7:20</span>
+            <span class="routine-text">📖 قرآن (صفحتين بتدبّر)</span>
+          </div>
+          <div class="routine-item">
+            <span class="routine-time">7:20 – 8:00</span>
+            <span class="routine-text">فطور وهدوء بدون موبايل</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- أول تركيز دراسة -->
+      <div class="routine-section">
+        <div class="routine-section-header rs-study1">📘 أول تركيز دراسة</div>
+        <div class="routine-items">
+          <div class="routine-item">
+            <span class="routine-time">8:00 – 9:30</span>
+            <span class="routine-text">🧪 محاضرة كيمياء (مشاهدة بتركيز)</span>
+          </div>
+          <div class="routine-item">
+            <span class="routine-time">9:30 – 10:00</span>
+            <span class="routine-text">🧠 حفظ أهم النقاط</span>
+          </div>
+          <div class="routine-item">
+            <span class="routine-time">10:00 – 10:30</span>
+            <span class="routine-text">♟ شطرنج على Chess.com أو مكعب روبيك</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- الظهر -->
+      <div class="routine-section">
+        <div class="routine-section-header rs-duhr">🕌 الظهر</div>
+        <div class="routine-items">
+          <div class="routine-item">
+            <span class="routine-time">12:30 – 1:00</span>
+            <span class="routine-text">صلاة الظهر + استراحة قصيرة</span>
+          </div>
+          <div class="routine-item">
+            <span class="routine-time">1:00 – 2:00</span>
+            <span class="routine-text">🎮 تلفون / بلاي بدون تأنيب ضمير</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ثاني تركيز دراسة -->
+      <div class="routine-section">
+        <div class="routine-section-header rs-study2">📗 ثاني تركيز دراسة</div>
+        <div class="routine-items">
+          <div class="routine-item">
+            <span class="routine-time">2:00 – 3:15</span>
+            <span class="routine-text">📚 المحاضرة الثانية (أي مادة)</span>
+          </div>
+          <div class="routine-item">
+            <span class="routine-time">3:15 – 3:45</span>
+            <span class="routine-text">مراجعة + تثبيت</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- العصر + نشاط -->
+      <div class="routine-section">
+        <div class="routine-section-header rs-asr">🕌 العصر + نشاط</div>
+        <div class="routine-items">
+          <div class="routine-item">
+            <span class="routine-time">4:20 – 4:35</span>
+            <span class="routine-text">صلاة العصر</span>
+          </div>
+          <div class="routine-item">
+            <span class="routine-time">4:35 – 5:05</span>
+            <span class="routine-text">تمرين خفيف مناسب للإصابة</span>
+          </div>
+          <div class="routine-item">
+            <span class="routine-time">5:05 – 5:30</span>
+            <span class="routine-text">سباحة / شاور</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- المغرب -->
+      <div class="routine-section">
+        <div class="routine-section-header rs-maghrib">🌇 المغرب</div>
+        <div class="routine-items">
+          <div class="routine-item">
+            <span class="routine-time">المغرب</span>
+            <span class="routine-text">صلاة + أذكار</span>
+          </div>
+          <div class="routine-item">
+            <span class="routine-time">30 دقيقة</span>
+            <span class="routine-text">🎨 هواية ممتعة: رسم سريع، أو تصوير بالموبايل، أو تعلّم عزف من JustinGuitar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- الليل الهادئ -->
+      <div class="routine-section">
+        <div class="routine-section-header rs-night">🌙 العشاء والليل الهادئ</div>
+        <div class="routine-items">
+          <div class="routine-item">
+            <span class="routine-time">العشاء</span>
+            <span class="routine-text">صلاة</span>
+          </div>
+          <div class="routine-item">
+            <span class="routine-time">20 دقيقة</span>
+            <span class="routine-text">📖 قرآن خفيف</span>
+          </div>
+          <div class="routine-item">
+            <span class="routine-time">30 دقيقة</span>
+            <span class="routine-text">🎧 حلقة من فنجان</span>
+          </div>
+          <div class="routine-item">
+            <span class="routine-time">قبل النوم</span>
+            <span class="routine-text">اكتب 3 أشياء أنجزتها اليوم</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ليش ممتع -->
+      <div class="routine-why">
+        <div class="routine-why-title">✨ ليش هذا الروتين ممتع؟</div>
+        <div class="routine-why-item"><div class="routine-why-dot"></div><span>دراسة على فترتين فقط (ماكو ضغط)</span></div>
+        <div class="routine-why-item"><div class="routine-why-dot"></div><span>هوايات داخل اليوم مو بس دراسة</span></div>
+        <div class="routine-why-item"><div class="routine-why-dot"></div><span>وقت لعب وترفيه محسوب</span></div>
+        <div class="routine-why-item"><div class="routine-why-dot"></div><span>قرآن وصلاة موزعة تريح النفس</span></div>
+        <div class="routine-why-item"><div class="routine-why-dot"></div><span>حركة جسم بدون ما تأذي</span></div>
+      </div>
+
+    </div>
+  </div>
+</main>
 
 <footer>جدول المراجعة الدراسية – 2026</footer>
 
@@ -359,6 +640,7 @@
   let completed = {};
   try { completed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch(e) {}
   let activeWeek = null;
+  let currentTab = "jadwal";
 
   function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(completed)); }
 
@@ -390,6 +672,17 @@
       t.subjects.forEach((_,i) => { if (getCompleted(t.date, i)) done++; });
     });
     return { total, done };
+  }
+
+  function switchTab(tab) {
+    currentTab = tab;
+    document.getElementById("tabJadwal").classList.toggle("active", tab === "jadwal");
+    document.getElementById("tabRoutine").classList.toggle("active", tab === "routine");
+    document.getElementById("pageJadwal").classList.toggle("active", tab === "jadwal");
+    document.getElementById("pageRoutine").classList.toggle("active", tab === "routine");
+    document.getElementById("weekNavBar").style.display = tab === "jadwal" ? "" : "none";
+    document.getElementById("progressWrap").style.display = tab === "jadwal" ? "" : "none";
+    document.getElementById("progressBarWrap").style.display = tab === "jadwal" ? "" : "none";
   }
 
   function renderWeekNav() {
